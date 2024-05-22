@@ -241,3 +241,16 @@ I can't access the mail server with ruy@mailing.htb, admin@mailing.htb, or maya@
 
 I'm stumped and the discussion posts here are not helpful.
 
+So I asked on the discussion board and they mentioned trying to get access on smtp.
+
+Some research finds [this page](https://www.comparitech.com/net-admin/telnet-smtp-test/)
+
+When I connect using `telnet mailing.htb 587` I get connected and can run:
+```
+EHLO mailing.htb
+AUTH LOGIN
+homenetworkingadministrator
+```
+
+So I am thinking the next steps here is figuring out how to leverage this connection to send get a reverse shell.
+
