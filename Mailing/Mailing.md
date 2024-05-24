@@ -249,8 +249,13 @@ When I connect using `telnet mailing.htb 587` I get connected and can run:
 ```
 EHLO mailing.htb
 AUTH LOGIN
-homenetworkingadministrator
 ```
+
+But it asks for the username and password and nothing I try works. The cracked password I got above doesn't work. 
 
 So I am thinking the next steps here is figuring out how to leverage this connection to send get a reverse shell.
 
+I found [this](https://janithmalinga.github.io/redteam/ctf/2020/02/12/Using-LFI-and-SMTP-to-get-a-Shell.html) and the hmailserver documentation mentions that all emails are stored here:
+`C:\Program Files\hMailServer\Data`
+
+Once again stumped. I'm sure I am missing something simple. I feel like I could get the reverse shell with access to the server, but I can't authenticate.
