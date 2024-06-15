@@ -132,3 +132,25 @@ There an interesting host in the output...
 127.0.1.1	boardlight
 ```
 
+When looking at the linpeas output and specifically grepping for light I see:
+```
+  LightCyan: Users with console
+  LightMagenta: Your username
+Hostname: boardlight
+lightdm Not Found
+boardlight
+127.0.0.1	localhost boardlight board.htb crm.board.htb
+127.0.1.1	boardlight
+-rwsr-xr-x 1 root root 27K Jan 29  2020 /usr/lib/x86_64-linux-gnu/enlightenment/utils/enlightenment_sys (Unknown SUID binary!)
+-rwsr-xr-x 1 root root 15K Jan 29  2020 /usr/lib/x86_64-linux-gnu/enlightenment/utils/enlightenment_ckpasswd (Unknown SUID binary!)
+-rwsr-xr-x 1 root root 15K Jan 29  2020 /usr/lib/x86_64-linux-gnu/enlightenment/utils/enlightenment_backlight (Unknown SUID binary!)
+-rwsr-xr-x 1 root root 15K Jan 29  2020 /usr/lib/x86_64-linux-gnu/enlightenment/modules/cpufreq/linux-gnu-x86_64-0.23.1/freqset (Unknown SUID binary!
+```
+
+The enlightenment_sys file seems interesting so I searched for exploits and found:
+https://www.exploit-db.com/exploits/51180
+
+This is a priv esc exploit with a script already written for it. All I did was copy it over (same way as linpeas), then run and had a root shell.
+
+Then getting the root flag was easy.
+
