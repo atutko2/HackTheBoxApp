@@ -1,0 +1,14 @@
+# Nmap 7.95 scan initiated Sat Sep 28 14:52:52 2024 as: nmap -sC -p 21,22,80 -oA sightless_script_scan 10.10.11.32
+Nmap scan report for 10.10.11.32
+Host is up (0.051s latency).
+
+PORT   STATE SERVICE
+21/tcp open  ftp
+22/tcp open  ssh
+| ssh-hostkey: 
+|   256 c9:6e:3b:8f:c6:03:29:05:e5:a0:ca:00:90:c9:5c:52 (ECDSA)
+|_  256 9b:de:3a:27:77:3b:1b:e1:19:5f:16:11:be:70:e0:56 (ED25519)
+80/tcp open  http
+|_http-title: Did not follow redirect to http://sightless.htb/
+
+# Nmap done at Sat Sep 28 14:53:09 2024 -- 1 IP address (1 host up) scanned in 16.52 seconds

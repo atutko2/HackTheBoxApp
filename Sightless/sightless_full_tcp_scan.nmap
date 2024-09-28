@@ -1,0 +1,11 @@
+# Nmap 7.95 scan initiated Sat Sep 28 14:48:13 2024 as: nmap -p- --open -oA sightless_full_tcp_scan 10.10.11.32
+Nmap scan report for 10.10.11.32
+Host is up (0.058s latency).
+Not shown: 63339 closed tcp ports (conn-refused), 2193 filtered tcp ports (no-response)
+Some closed ports may be reported as filtered due to --defeat-rst-ratelimit
+PORT   STATE SERVICE
+21/tcp open  ftp
+22/tcp open  ssh
+80/tcp open  http
+
+# Nmap done at Sat Sep 28 15:04:00 2024 -- 1 IP address (1 host up) scanned in 947.15 seconds

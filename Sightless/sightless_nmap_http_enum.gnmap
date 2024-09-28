@@ -1,0 +1,4 @@
+# Nmap 7.95 scan initiated Sat Sep 28 14:54:07 2024 as: nmap -sV --script=http-enum -oA sightless_nmap_http_enum 10.10.11.32
+Host: 10.10.11.32 ()	Status: Up
+Host: 10.10.11.32 ()	Ports: 21/open/tcp//tcpwrapped///, 22/open/tcp//ssh//OpenSSH 8.9p1 Ubuntu 3ubuntu0.10 (Ubuntu Linux; protocol 2.0)/, 80/open/tcp//http//nginx 1.18.0 (Ubuntu)/	Ignored State: closed (997)
+# Nmap done at Sat Sep 28 14:57:31 2024 -- 1 IP address (1 host up) scanned in 203.32 seconds

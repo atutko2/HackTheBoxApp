@@ -1,0 +1,19 @@
+# Nmap 7.95 scan initiated Sat Sep 28 14:46:49 2024 as: nmap -sV --open -oA sightless_initial_scan 10.10.11.32
+Nmap scan report for 10.10.11.32
+Host is up (0.058s latency).
+Not shown: 951 closed tcp ports (conn-refused), 46 filtered tcp ports (no-response)
+Some closed ports may be reported as filtered due to --defeat-rst-ratelimit
+PORT   STATE SERVICE VERSION
+21/tcp open  ftp
+22/tcp open  ssh     OpenSSH 8.9p1 Ubuntu 3ubuntu0.10 (Ubuntu Linux; protocol 2.0)
+80/tcp open  http    nginx 1.18.0 (Ubuntu)
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port21-TCP:V=7.95%I=7%D=9/28%Time=66F84F36%P=x86_64-apple-darwin21.6.0%
+SF:r(GenericLines,A0,"220\x20ProFTPD\x20Server\x20\(sightless\.htb\x20FTP\
+SF:x20Server\)\x20\[::ffff:10\.10\.11\.32\]\r\n500\x20Invalid\x20command:\
+SF:x20try\x20being\x20more\x20creative\r\n500\x20Invalid\x20command:\x20tr
+SF:y\x20being\x20more\x20creative\r\n");
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Sat Sep 28 14:47:36 2024 -- 1 IP address (1 host up) scanned in 47.11 seconds

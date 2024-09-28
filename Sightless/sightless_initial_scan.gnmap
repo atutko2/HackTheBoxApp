@@ -1,0 +1,4 @@
+# Nmap 7.95 scan initiated Sat Sep 28 14:46:49 2024 as: nmap -sV --open -oA sightless_initial_scan 10.10.11.32
+Host: 10.10.11.32 ()	Status: Up
+Host: 10.10.11.32 ()	Ports: 21/open/tcp//ftp///, 22/open/tcp//ssh//OpenSSH 8.9p1 Ubuntu 3ubuntu0.10 (Ubuntu Linux; protocol 2.0)/, 80/open/tcp//http//nginx 1.18.0 (Ubuntu)/
+# Nmap done at Sat Sep 28 14:47:36 2024 -- 1 IP address (1 host up) scanned in 47.11 seconds

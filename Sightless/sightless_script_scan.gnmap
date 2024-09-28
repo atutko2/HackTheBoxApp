@@ -1,0 +1,4 @@
+# Nmap 7.95 scan initiated Sat Sep 28 14:52:52 2024 as: nmap -sC -p 21,22,80 -oA sightless_script_scan 10.10.11.32
+Host: 10.10.11.32 ()	Status: Up
+Host: 10.10.11.32 ()	Ports: 21/open/tcp//ftp///, 22/open/tcp//ssh///, 80/open/tcp//http///
+# Nmap done at Sat Sep 28 14:53:09 2024 -- 1 IP address (1 host up) scanned in 16.52 seconds
